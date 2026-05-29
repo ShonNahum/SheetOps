@@ -4,7 +4,7 @@
 
 SheetOps is a comprehensive platform that enables you to upload Excel workbooks and instantly convert them into queryable, scalable REST APIs. Perfect for enterprise environments, air-gapped networks, and scenarios where traditional database setup is overkill.
 
-![screenshot](https://imgur.com/a/sheetops-paQnP7u)
+![screenshot](https://imgur.com/a/sheetops-paQnP7u.gif)
 ##  Features
 
 - **Drag & Drop Upload** - Simple UI for uploading Excel files
