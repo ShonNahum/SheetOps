@@ -1,0 +1,29 @@
+{
+  "name": "sheetops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SheetOps — Production-grade Excel management platform",
+  "scripts": {
+    "dev:api": "npm run start:dev -w apps/api",
+    "dev:worker": "npm run start:dev -w apps/worker",
+    "dev:frontend": "npm run dev -w apps/frontend",
+    "build:api": "npm run build -w apps/api",
+    "build:worker": "npm run build -w apps/worker",
+    "build:frontend": "npm run build -w apps/frontend",
+    "build": "npm run build --workspaces --if-present",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:worker\" \"npm run dev:frontend\"",
+    "typeorm": "npm run typeorm -w apps/api",
+    "migration:run": "npm run migration:run -w apps/api",
+    "migration:generate": "npm run migration:generate -w apps/api"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}

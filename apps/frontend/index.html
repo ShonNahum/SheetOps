@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SheetOps</title>
+    <link rel="stylesheet" href="/fonts/inter.css" />
+    <script>
+      // Auto-detect RTL languages
+      const language = navigator.language || navigator.userLanguage;
+      const rtlLanguages = ['he', 'ar', 'ur', 'fa', 'yi'];
+      const isRTL = rtlLanguages.some(lang => language.startsWith(lang));
+      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+      document.documentElement.lang = language;
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

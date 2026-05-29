@@ -1,0 +1,101 @@
+services:
+  postgres:
+    container_name: sheetops-postgres
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: sheetops
+      POSTGRES_USER: sheetops
+      POSTGRES_PASSWORD: changeme
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+        # ports:
+        # - "5432:5432"
+    networks:
+      - sheetops-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sheetops"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    container_name: sheetops-redis
+    image: redis:7-alpine
+    restart: always
+      #    ports:
+      # - "6379:6379"
+    networks:
+      - sheetops-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    container_name: sheetops-api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+      UPLOAD_DIR: /data/uploads
+      TEMP_DIR: /data/temp
+    volumes:
+      - file_data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - sheetops-net
+
+  worker:
+    container_name: sheetops-worker
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+      UPLOAD_DIR: /data/uploads
+    volumes:
+      - file_data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - sheetops-net
+
+  frontend:
+    container_name: sheetops-frontend
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - sheetops-net
+
+networks:
+  sheetops-net:
+    name: sheetops-net
+    driver: bridge
+
+volumes:
+  postgres_data:
+  file_data:
