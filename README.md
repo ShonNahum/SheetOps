@@ -1,6 +1,6 @@
 # SheetOps 
 
-**Transform Excel files into live, production-ready APIs in minutes.**
+**Transform Excel files into live, production-ready APIs in minutes. [support offline envrionments]**
 
 SheetOps is a comprehensive platform that enables you to upload Excel workbooks and instantly convert them into queryable, scalable REST APIs. Perfect for enterprise environments, air-gapped networks, and scenarios where traditional database setup is overkill.
 
