@@ -21,7 +21,7 @@ SheetOps is a comprehensive platform that enables you to upload Excel workbooks 
 
 ## 🏗️ Architecture
 
-![Architecture](images/architecture.png)
+![Architecture](architecture.png)
 
 ### Components
 
