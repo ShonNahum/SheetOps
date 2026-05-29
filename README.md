@@ -67,7 +67,7 @@ The application will be available at:
 
 ### 1. Upload an Excel File
 
-1. Open http://localhost:3000
+1. Open http://<app-domain>:3000
 2. Drag and drop an Excel file (`.xlsx`, `.xls`, `.csv`)
 3. File processing starts automatically
 4. Progress updates in real-time via WebSocket
@@ -84,33 +84,33 @@ The application will be available at:
 **By Clicking on The Value, you will get his specific API**
 #### List Sheets
 ```bash
-curl http://localhost:3001/api/v1/workbooks/{id}
+curl http://<app-domain>:3001/api/v1/workbooks/{id}
 ```
 
 #### Get Sheet Data
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows?page=0&pageSize=100"
+curl "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows?page=0&pageSize=100"
 ```
 
 #### Get Specific Cell
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/cells/{rowIndex}/{colIndex}"
+curl "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/cells/{rowIndex}/{colIndex}"
 ```
 
 #### Get Row
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows/{rowIndex}"
+curl "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows/{rowIndex}"
 ```
 
 #### Get Column
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/columns/{colIndex}"
+curl "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/columns/{colIndex}"
 ```
 
 #### Update Cell
 ```bash
 curl -X PATCH \
-  "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/cells" \
+  "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/cells" \
   -H "Content-Type: application/json" \
   -d '{
     "cells": [
@@ -121,12 +121,12 @@ curl -X PATCH \
 
 #### Search
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/search?q=keyword&limit=50"
+curl "http://<app-domain>:3001/api/v1/workbooks/search?q=keyword&limit=50"
 ```
 
 #### Export
 ```bash
-curl "http://localhost:3001/api/v1/workbooks/{id}/export" \
+curl "http://<app-domain>:3001/api/v1/workbooks/{id}/export" \
   -o workbook.xlsx
 ```
 
@@ -135,7 +135,7 @@ curl "http://localhost:3001/api/v1/workbooks/{id}/export" \
 Generate API keys for programmatic access:
 ```bash
 curl -X POST \
-  "http://localhost:3001/api/v1/workbooks/{id}/api-keys" \
+  "http://<app-domain>:3001/api/v1/workbooks/{id}/api-keys" \
   -H "Content-Type: application/json" \
   -d '{"name": "My API Key"}'
 ```
@@ -143,7 +143,7 @@ curl -X POST \
 Use in requests:
 ```bash
 curl -H "X-API-Key: your-key" \
-  "http://localhost:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows"
+  "http://<app-domain>:3001/api/v1/workbooks/{id}/sheets/{sheetId}/rows"
 ```
 
 ## 🏢 Air-Gapped Network Deployment
@@ -219,11 +219,11 @@ REDIS_PORT=6379
 
 ## 📚 API Documentation
 
-Full API documentation available at: http://localhost:3001/api
+Full API documentation available at: http://<app-domain>:3001/api
 
 ### Base URL
 ```
-http://localhost:3001/api/v1
+http://<app-domain>:3001/api/v1
 ```
 
 ### Key Endpoints
@@ -241,15 +241,6 @@ http://localhost:3001/api/v1
 | `GET` | `/workbooks/{id}/sheets/{sheetId}/columns/{colIndex}` | Get column |
 | `GET` | `/workbooks/{id}/export` | Export as Excel |
 | `GET` | `/workbooks/search?q=query` | Search across data |
-
-## 🔧 Development
-
-### Prerequisites
-- Node.js 18+
-- PostgreSQL 15+
-- Redis 7+
-- pnpm 8+
-
 
 
 ## 📦 Deployment
@@ -308,6 +299,5 @@ docker-compose down -v
 
 ---
 
-**Made with ❤️ for Kapatim**
 
 
